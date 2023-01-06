@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { ComparisonContext } from "./AutoCompletionList";
+import { useComparedData } from "../../hooks/useComparedData";
 
 export function Compare() {
-  const compare = useContext(ComparisonContext);
+  const symbols = useContext(ComparisonContext);
+  const data = useComparedData(symbols);
 
-  console.log(compare);
+  console.log(data, "data");
   return <div>compare</div>;
 }
