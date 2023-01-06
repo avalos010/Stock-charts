@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 
 function SearchInput({ onChange }: SearchInpuProps) {
   return (
-    <div className="input-group mb-3">
+    <div className="input-group mb-3" style={{ width: "340px" }}>
       <input
         onChange={(e) => onChange(e)}
         type="text"
