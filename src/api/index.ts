@@ -2,7 +2,7 @@ import axios from "axios";
 const key = import.meta.env.API_KEY;
 const baseURL = "https://www.alphavantage.co/query?";
 
-interface autoComplete {
+export interface autoComplete {
   bestMatches: {
     "1. symbol": string;
     "2. name": string;
