@@ -1,23 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { getComparedData } from "../api";
 
-export function useComparedData(symbols: string[]) {
-  const [stockData, setStockData] = useState<any[]>([]);
+const symbolsFetched: string[] = [];
 
-  useQuery(
+export function useComparedData(symbols: string[]) {
+  return useQuery(
     ["comparedData", symbols],
     async () => {
+      const data = [];
       for (let symbol of symbols) {
-        setStockData([...stockData, getComparedData(symbol)]);
+        if (!symbolsFetched.includes(symbol)) {
+          //dont refetch symbol data if we have it already
+          const res = await getComparedData(symbol);
+          data.push([res]);
+          symbolsFetched.push(symbol);
+        }
       }
+      return data;
     },
     {
       enabled: !!symbols.length,
+      staleTime: 60000,
+      refetchOnWindowFocus: false,
     }
   );
-
-  console.log(stockData);
-
-  return stockData;
 }
