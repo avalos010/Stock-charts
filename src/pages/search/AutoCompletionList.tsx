@@ -36,7 +36,7 @@ function AutoCompletionList({ query }: AutoCompletionListProps) {
           )}
       </div>
 
-      <Chart />
+      {symbol && <Chart />}
     </ComparisonContext.Provider>
   );
 }
