@@ -1,20 +1,18 @@
 import React, { createContext, useState } from "react";
 import { useAutoCompletion } from "../../hooks/useAutoCompletion";
-import { Compare } from "./Compare";
-export const ComparisonContext = createContext<string[]>([]);
+import { Chart } from "./Chart";
+export const ComparisonContext = createContext<string>("");
 
 function AutoCompletionList({ query }: AutoCompletionListProps) {
   const { data } = useAutoCompletion(query);
-  const [compare, setCompare] = useState<string[]>([]);
+  const [symbol, setSymbol] = useState("");
 
-  function addToCompare(symbol: string) {
-    if (!compare.includes(symbol)) {
-      setCompare([...compare, symbol]);
-    }
+  function addSymbol(str: string) {
+    setSymbol(str);
   }
 
   return (
-    <ComparisonContext.Provider value={compare}>
+    <ComparisonContext.Provider value={symbol}>
       <div className="list-group">
         {!!data?.bestMatches &&
           React.Children.toArray(
@@ -27,7 +25,7 @@ function AutoCompletionList({ query }: AutoCompletionListProps) {
                     {name} - {symbol}
                   </p>
                   <button
-                    onClick={() => addToCompare(symbol)}
+                    onClick={() => addSymbol(symbol)}
                     className="btn btn-outline-dark btn-sm"
                   >
                     Add
@@ -38,7 +36,7 @@ function AutoCompletionList({ query }: AutoCompletionListProps) {
           )}
       </div>
 
-      <Compare />
+      <Chart />
     </ComparisonContext.Provider>
   );
 }

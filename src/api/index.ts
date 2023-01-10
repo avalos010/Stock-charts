@@ -17,21 +17,7 @@ export async function getAutoComplete(query: string) {
   return data;
 }
 
-// export async function getComparedData(symbols: string[]) {
-//   const comparedData = [];
-//   for (let symbol of symbols) {
-//     const res = await axios.get(
-//       `${baseURL}function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=${symbol}&apikey=${key}`
-//     );
-//     const data = res.data;
-//     comparedData.push(data);
-//   }
-
-//   console.log(comparedData);
-//   return comparedData;
-// }
-
-export async function getComparedData(symbol: string) {
+export async function getChartData(symbol: string) {
   const res = await axios.get(
     `${baseURL}function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=${symbol}&apikey=${key}`
   );

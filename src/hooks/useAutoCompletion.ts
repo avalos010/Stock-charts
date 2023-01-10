@@ -9,6 +9,9 @@ export function useAutoCompletion(query: string) {
     },
     {
       enabled: !!query,
+      refetchIntervalInBackground: false,
+      refetchOnMount: false,
+      staleTime: 6000,
     }
   );
 }
