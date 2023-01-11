@@ -6,7 +6,6 @@ export function useChartData(symbol: string) {
     ["chartData", symbol],
     async () => {
       const data = await getChartData(symbol);
-      console.log(data, "data");
       return data;
     },
     {

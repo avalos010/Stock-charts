@@ -9,6 +9,16 @@ export interface autoComplete {
   }[];
 }
 
+export interface chartData {
+  response: {
+    symbol: string;
+    date: string;
+    open: number;
+    close: number;
+    volume: number;
+  }[];
+}
+
 console.log(key, "woooo");
 
 export async function getAutoComplete(query: string) {
@@ -21,8 +31,8 @@ export async function getAutoComplete(query: string) {
 
 export async function getChartData(symbol: string) {
   const res = await axios.get(
-    `/api/historicstockprices?&symbol=${symbol}&from=2021-01-04&to=2022-01-07&fields=symbol,date,open,close&apikey=${oddKey}&format=json`
+    `/api/historicstockprices?&symbol=${symbol}&from=2022-01-04&to=2022-07-07&fields=symbol,date,open,close,volume&apikey=${oddKey}&format=json`
   );
-  const data = res.data;
+  const data: chartData = res.data;
   return data;
 }

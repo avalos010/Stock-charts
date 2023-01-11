@@ -1,18 +1,21 @@
-import { useContext } from "react";
-import { ChartContext } from "./AutoCompletionList";
+import { ResponsiveContainer } from "recharts";
 import { useChartData } from "../../hooks/useChartData";
+import { useParams } from "react-router-dom";
+import { Line } from "../../components/charts/Line";
 
 export function Chart() {
-  const symbol = useContext(ChartContext);
-  const { data } = useChartData(symbol);
+  const { symbol } = useParams();
+  const { data } = useChartData(symbol as string);
 
-  if (data) {
-    const {
-      ["Meta Data"]: metaData,
-      ["Monthly Adjusted Time Series"]: series,
-    } = data;
-    console.log(metaData, series);
-    return <div>charts here</div>;
+  if (data?.response) {
+    return (
+      <div>
+        <h2>{symbol?.toUpperCase()}</h2>
+        <ResponsiveContainer height={400} width="90%">
+          <Line data={data} />
+        </ResponsiveContainer>
+      </div>
+    );
   } else {
     return null;
   }
