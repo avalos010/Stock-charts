@@ -1,16 +1,20 @@
+# [[redirects]]
+# force = true
+# from = "/api/*"
+# status = 200
+
+# [[redirects]]
+# from = '/*'
+# status = 200
+# to = '/index.html'
+
+
 [[redirects]]
-force = true
-from = "/api/*"
-status = 200
-to = 'https://www.wallstreetoddsapi.com/api/:splat'
+  from = "/api/*"
+  to = 'https://www.wallstreetoddsapi.com/api/:splat'
+  status = 200
 
 [[redirects]]
-from = '/*'
-status = 200
-to = '/index.html'
-
-[build]
-command = 'npm run build'
-publish = 'dist'
-
-
+  from = "/*"
+  to = "/index.html"
+  status = 200
