@@ -1,8 +1,8 @@
-[[redirects]]
-force = true
-from = '/api/*'
-status = 200
-to = 'https://www.wallstreetoddsapi.com/api/'
+# [[redirects]]
+# force = true
+# from = '/api/*'
+# status = 200
+# to = 'https://www.wallstreetoddsapi.com/api/'
 
 [[redirects]]
 from = '/*'
@@ -18,6 +18,6 @@ autoLaunch = false
 
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
-  for = "/*"
+  for = "/api/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
