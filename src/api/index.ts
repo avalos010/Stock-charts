@@ -19,8 +19,6 @@ export interface chartData {
   }[];
 }
 
-console.log(key, "woooo");
-
 export async function getAutoComplete(query: string) {
   const res = await axios.get(
     `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${query}&apikey=${key}`
@@ -34,5 +32,6 @@ export async function getChartData(symbol: string) {
     `/api/historicstockprices?&symbol=${symbol}&from=2022-01-04&to=2022-07-07&fields=symbol,date,open,close,volume&apikey=${oddKey}&format=json`
   );
   const data: chartData = res.data;
+  console.log(data, "data");
   return data;
 }
