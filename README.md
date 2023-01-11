@@ -22,7 +22,7 @@ Playwright - Node.js library for end-to-end testing
 To run the tests, use npm test or yarn test.
 
 ## Acknowledgments
-Alpha Advantage API
+Alpha Advantage API 
 Wall Street Odds API
 
 
