@@ -1,6 +1,7 @@
 import axios from "axios";
 const key = import.meta.env.VITE_API_KEY;
 const oddKey = import.meta.env.VITE_ODDS_API_KEY;
+const enviroment = import.meta.env.VITE_ENV;
 
 export interface autoComplete {
   bestMatches: {
@@ -30,9 +31,11 @@ export async function getAutoComplete(query: string) {
 }
 
 export async function getChartData(symbol: string) {
-  const res = await axios.get(
-    `/api/historicstockprices?&symbol=${symbol}&from=2022-01-04&to=2022-07-07&fields=symbol,date,open,close,volume&apikey=${oddKey}&format=json`
-  );
+  const localUrl = `/api/historicstockprices?&symbol=${symbol}&from=2022-01-04&to=2022-07-07&fields=symbol,date,open,close,volume&apikey=${oddKey}&format=json`;
+  const testURL = `https://www.wallstreetoddsapi.com/api/historicstockprices?&symbol=${symbol}&from=2022-01-04&to=2022-07-07&fields=symbol,date,open,close,volume&apikey=${oddKey}&format=json`;
+  const url = enviroment === "local" ? localUrl : testURL;
+
+  const res = await axios.get(url);
   const data: chartData = res.data;
   return data;
 }
