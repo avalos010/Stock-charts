@@ -4,10 +4,10 @@ from = '/api'
 status = 200
 to = 'https://www.wallstreetoddsapi.com/api/'
 
-[[redirects]]
-from = '/*'
-status = 200
-to = '/index.html'
+# [[redirects]]
+# from = '/*'
+# status = 200
+# to = '/index.html'
 
 [build]
 command = 'npm run build'
