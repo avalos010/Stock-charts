@@ -5,7 +5,7 @@ This repository contains a simple web application that utilizes the Alpha Advant
 This is a work in progress, and new features are planned to be added in the future.
 
 ## Getting Started
-To run the application locally, clone the repository and install the required dependencies by running npm install in the root directory. Once the dependencies are installed, start the development server by running npm run dev. The application will be accessible at http://localhost:3000.
+To run the application locally, clone the repository and install the required dependencies by running npm install in the root directory. Once the dependencies are installed, start the development server by running npm run dev. The application will be accessible at http://localhost:5173
 
 ## Prerequisites
 Node.js
