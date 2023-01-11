@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 import { useAutoCompletion } from "../../hooks/useAutoCompletion";
 import { Chart } from "./Chart";
-export const ComparisonContext = createContext<string>("");
+export const ChartContext = createContext<string>("");
 
 function AutoCompletionList({ query }: AutoCompletionListProps) {
   const { data } = useAutoCompletion(query);
@@ -12,7 +12,7 @@ function AutoCompletionList({ query }: AutoCompletionListProps) {
   }
 
   return (
-    <ComparisonContext.Provider value={symbol}>
+    <ChartContext.Provider value={symbol}>
       <div className="list-group">
         {!!data?.bestMatches &&
           React.Children.toArray(
@@ -37,7 +37,7 @@ function AutoCompletionList({ query }: AutoCompletionListProps) {
       </div>
 
       {symbol && <Chart />}
-    </ComparisonContext.Provider>
+    </ChartContext.Provider>
   );
 }
 
