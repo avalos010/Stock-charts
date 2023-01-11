@@ -1,5 +1,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ebb591d1-2ff9-460f-9bd1-a5bef91a0fdd/deploy-status)](https://app.netlify.com/sites/incredible-pegasus-45d98d/deploys)
 
+[![PlayWright Tests](https://github.com/avalos010/Stock-charts/actions/workflows/playwright.yml/badge.svg)](https://github.com/avalos010/Stock-charts/actions/workflows/playwright.yml)
+
 This repository contains a simple web application that utilizes the Alpha Advantage API for auto-completion of symbols and the WallStreetOddsAPI for obtaining current symbol data. The live version of the application can be found at https://incredible-pegasus-45d98d.netlify.app/. The application is built with React and uses Vite as development server, Bootstrap for CSS styling and Playwright for testing.
 
 This is a work in progress, and new features are planned to be added in the future.
