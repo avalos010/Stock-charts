@@ -5,7 +5,7 @@ test.describe("charts", () => {
     page,
   }) => {
     await page.goto("/chart/MET");
-    const chartContainer = page.locator(".recharts-responsive-container");
+    const chartContainer = page.locator(".highcharts-container ");
     await expect(chartContainer).toBeVisible();
   });
 
