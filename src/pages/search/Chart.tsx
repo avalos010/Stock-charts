@@ -2,10 +2,12 @@ import { useChartData } from "../../hooks/useChartData";
 import { useParams } from "react-router-dom";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { convertDate } from "../../utils/convertDate";
+import { SavedChartsContext } from "../../App";
 
 export function Chart() {
+  const { state, dispatch } = useContext(SavedChartsContext);
   const { symbol } = useParams();
   const lastYear = new Date();
   lastYear.setFullYear(lastYear.getFullYear() - 1);
@@ -42,9 +44,21 @@ export function Chart() {
     ],
   };
 
+  console.log(state, dispatch);
+
   return (
     <div>
       {!!isLoading && <p>Loading...</p>}
+      <button
+        onClick={() =>
+          dispatch({
+            type: "add_to_faves",
+            payload: { data: sortedData, symbol },
+          })
+        }
+      >
+        Save to favorites
+      </button>
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
