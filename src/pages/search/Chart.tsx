@@ -1,11 +1,13 @@
 import { useChartData } from "../../hooks/useChartData";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { useContext, useEffect, useRef, useState } from "react";
 import { convertDate } from "../../utils/convertDate";
 import { SavedChartsContext } from "../../App";
 import { Action, State } from "../../reducer/chartsReducer";
+import { ErrorAlert } from "../../components/ErrorAlert";
+import { Spinner } from "../../components/Spinner";
 
 export function Chart() {
   const { state, dispatch } = useContext(SavedChartsContext) as {
@@ -13,15 +15,18 @@ export function Chart() {
     dispatch: React.Dispatch<Action>;
   };
   const { symbol } = useParams();
+  const navigate = useNavigate();
   const lastYear = new Date();
   lastYear.setFullYear(lastYear.getFullYear() - 1);
   const [dates, setDates] = useState<string[]>([]);
-  const { data, isLoading } = useChartData(symbol as string, dates);
+  const { data, isLoading, isError } = useChartData(symbol as string, dates);
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
-  const sortedData = data?.response.sort(
-    // @ts-ignore
-    (a, b) => new Date(a.date) - new Date(b.date)
-  );
+  const sortedData = data
+    ? data.response.sort(
+        // @ts-ignore
+        (a, b) => new Date(a.date) - new Date(b.date)
+      )
+    : [];
   const isSaved = state.savedCharts.some((chart) => chart.name === symbol);
   useEffect(() => {
     setDates([convertDate(lastYear), convertDate(new Date())]);
@@ -48,11 +53,18 @@ export function Chart() {
     ],
   };
 
-  console.log(state, dispatch);
+  useEffect(() => {
+    if (isError) {
+      setTimeout(() => navigate("/"), 5000);
+    }
+  }, [isError]);
 
   return (
     <div>
-      {!!isLoading && <p>Loading...</p>}
+      {!!isLoading && <Spinner />}
+      {isError && (
+        <ErrorAlert message="No Data available you will be redirected in a few seconds..." />
+      )}
       <button
         onClick={() =>
           isSaved
