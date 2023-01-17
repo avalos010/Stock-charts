@@ -5,7 +5,7 @@ import { Nav } from "./components/Nav";
 import { createContext, useReducer } from "react";
 import { chartsReducer } from "./reducer/chartsReducer";
 
-export const SavedChartsContext = createContext();
+export const SavedChartsContext = createContext({});
 
 function App() {
   const [state, dispatch] = useReducer(chartsReducer, { savedCharts: [] });

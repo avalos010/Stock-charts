@@ -5,9 +5,13 @@ import HighchartsReact from "highcharts-react-official";
 import { useContext, useEffect, useRef, useState } from "react";
 import { convertDate } from "../../utils/convertDate";
 import { SavedChartsContext } from "../../App";
+import { Action, State } from "../../reducer/chartsReducer";
 
 export function Chart() {
-  const { state, dispatch } = useContext(SavedChartsContext);
+  const { state, dispatch } = useContext(SavedChartsContext) as {
+    state: State;
+    dispatch: React.Dispatch<Action>;
+  };
   const { symbol } = useParams();
   const lastYear = new Date();
   lastYear.setFullYear(lastYear.getFullYear() - 1);

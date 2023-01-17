@@ -15,11 +15,14 @@ export function chartsReducer(state: State, action: Action) {
   }
 }
 
-interface State {
-  savedCharts: [];
+export interface State {
+  savedCharts: {
+    data: [];
+    name: string;
+  }[];
 }
 
-interface Action {
+export interface Action {
   type?: "add_to_faves" | "removed_from_faves" | "clear_faves";
-  payload: any; //TODO: type this
+  payload?: any; //TODO: type this
 }
