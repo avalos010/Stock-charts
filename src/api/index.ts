@@ -9,14 +9,16 @@ export interface autoComplete {
   }[];
 }
 
+export interface chartDataResponse {
+  response: chartData[];
+}
+
 export interface chartData {
-  response: {
-    symbol: string;
-    date: string;
-    open: number;
-    close: number;
-    volume: number;
-  }[];
+  symbol: string;
+  date: string;
+  open: number;
+  close: number;
+  volume: number;
 }
 
 export async function getAutoComplete(query: string) {
@@ -27,11 +29,13 @@ export async function getAutoComplete(query: string) {
   return data;
 }
 
-export async function getChartData(symbol: string) {
+export async function getChartData(symbol: string, dates: string[]) {
+  const [from, to] = dates;
+  console.log(dates, "wooo");
   const res = await axios.get(
-    `/api/historicstockprices?&symbol=${symbol}&from=2022-01-04&to=2022-07-07&fields=symbol,date,open,close,volume&apikey=${oddKey}&format=json`
+    `/api/historicstockprices?&symbol=${symbol}&from=${from}&to=${to}&fields=symbol,date,open,close,volume&apikey=${oddKey}&format=json`
   );
-  const data: chartData = res.data;
+  const data: chartDataResponse = res.data;
   console.log(data, "data");
   return data;
 }

@@ -2,16 +2,24 @@ import { useChartData } from "../../hooks/useChartData";
 import { useParams } from "react-router-dom";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { convertDate } from "../../utils/convertDate";
 
 export function Chart() {
   const { symbol } = useParams();
-  const { data } = useChartData(symbol as string);
+  const lastYear = new Date();
+  lastYear.setFullYear(lastYear.getFullYear() - 1);
+  const [dates, setDates] = useState<string[]>([]);
+  const { data, isLoading } = useChartData(symbol as string, dates);
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
-  const sortedDates = data?.response.sort(
+  const sortedData = data?.response.sort(
     // @ts-ignore
     (a, b) => new Date(a.date) - new Date(b.date)
   );
+
+  useEffect(() => {
+    setDates([convertDate(lastYear), convertDate(new Date())]);
+  }, []);
 
   const options: Highcharts.Options = {
     title: {
@@ -23,26 +31,25 @@ export function Chart() {
       },
     },
     xAxis: {
-      categories: sortedDates?.map((i) => i.date),
+      categories: sortedData?.map((i) => i.date),
     },
     //TODO: Figure out these ts errors.
     series: [
       //@ts-ignore
-      { name: "Open", data: sortedDates?.map((d) => d.open) },
+      { name: "Open", data: sortedData?.map((d) => d.open) },
       //@ts-ignore
-      { name: "Close", data: sortedDates?.map((d) => d.close) },
+      { name: "Close", data: sortedData?.map((d) => d.close) },
     ],
   };
 
-  if (data?.response) {
-    return (
+  return (
+    <div>
+      {!!isLoading && <p>Loading...</p>}
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
         ref={chartComponentRef}
       />
-    );
-  } else {
-    return null;
-  }
+    </div>
+  );
 }

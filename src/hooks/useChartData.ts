@@ -1,15 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { getChartData } from "../api";
 
-export function useChartData(symbol: string) {
+export function useChartData(symbol: string, dates: string[]) {
+  console.log(dates);
   return useQuery(
-    ["chartData", symbol],
+    ["chartData", symbol, dates],
     async () => {
-      const data = await getChartData(symbol);
+      const data = await getChartData(symbol, dates);
       return data;
     },
     {
-      enabled: !!symbol,
+      enabled: !!symbol && !!dates,
       staleTime: 60000,
       refetchOnWindowFocus: false,
     }
