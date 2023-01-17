@@ -18,4 +18,8 @@ test.describe("charts", () => {
 
     await expect(page).toHaveURL("/chart/GOOGL");
   });
+
+  test("saving charts saves the charts", async ({ page }) => {
+    await page.goto("/chart/MET");
+  });
 });
