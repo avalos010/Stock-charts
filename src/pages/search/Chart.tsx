@@ -22,7 +22,7 @@ export function Chart() {
     // @ts-ignore
     (a, b) => new Date(a.date) - new Date(b.date)
   );
-
+  const isSaved = state.savedCharts.some((chart) => chart.name === symbol);
   useEffect(() => {
     setDates([convertDate(lastYear), convertDate(new Date())]);
   }, []);
@@ -55,13 +55,18 @@ export function Chart() {
       {!!isLoading && <p>Loading...</p>}
       <button
         onClick={() =>
-          dispatch({
-            type: "add_to_faves",
-            payload: { data: sortedData, symbol },
-          })
+          isSaved
+            ? dispatch({
+                type: "remove_from_saved",
+                payload: { symbol },
+              })
+            : dispatch({
+                type: "add_to_faves",
+                payload: { data: sortedData, symbol },
+              })
         }
       >
-        Save to favorites
+        {isSaved ? "Remove from Saved" : "Add to Saved"}
       </button>
       <HighchartsReact
         highcharts={Highcharts}

@@ -13,7 +13,6 @@ function App() {
   return (
     <div className="container">
       <Nav currentURL={useLocation().pathname} />
-      <h3>Stocks charts</h3>
 
       {/* TODO: remove routing if were not going to make use of it. */}
       <SavedChartsContext.Provider value={{ state, dispatch }}>

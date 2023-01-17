@@ -45,7 +45,7 @@ export function Saved() {
               onClick={() =>
                 dispatch({
                   type: "remove_from_saved",
-                  payload: { name: chart.name },
+                  payload: { symbol: chart.name },
                 })
               }
             >
