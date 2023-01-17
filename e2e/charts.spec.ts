@@ -19,7 +19,13 @@ test.describe("charts", () => {
     await expect(page).toHaveURL("/chart/GOOGL");
   });
 
-  test("saving charts saves the charts", async ({ page }) => {
+  test("saving a chart displays it under saved", async ({ page }) => {
     await page.goto("/chart/MET");
+    const saveButton = page.locator("button", { hasText: "Add to Saved" });
+    const savedChartsLink = page.locator("a", { hasText: "Saved Charts" });
+    await saveButton.click();
+    await savedChartsLink.click();
+    const chartTitle = page.locator(".highcharts-title");
+    expect(await chartTitle.textContent()).toBe("MET");
   });
 });
