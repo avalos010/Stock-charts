@@ -9,6 +9,14 @@ export function chartsReducer(state: State, action: Action) {
         ],
       };
     }
+    case "remove_from_saved": {
+      return {
+        ...state,
+        savedCharts: state.savedCharts.filter(
+          (chart) => chart.name !== action.payload.symbol
+        ),
+      };
+    }
     default: {
       return state;
     }
@@ -23,6 +31,6 @@ export interface State {
 }
 
 export interface Action {
-  type?: "add_to_faves" | "removed_from_faves" | "clear_faves";
+  type?: "add_to_faves" | "remove_from_saved" | "clear_faves";
   payload?: any; //TODO: type this
 }

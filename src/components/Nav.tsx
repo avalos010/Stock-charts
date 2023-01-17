@@ -14,6 +14,15 @@ export function Nav({ currentURL }: NavProps) {
         </Link>
       </li>
       <li className="nav-item">
+        <Link
+          className={`nav-link ${currentURL === "/saved" ? "active" : ""} `}
+          aria-current="page"
+          to="/saved"
+        >
+          Saved Charts
+        </Link>
+      </li>
+      <li className="nav-item">
         <a className="nav-link disabled" href="#">
           Charts
         </a>

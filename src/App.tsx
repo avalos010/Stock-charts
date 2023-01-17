@@ -4,6 +4,7 @@ import { Chart } from "./pages/search/Chart";
 import { Nav } from "./components/Nav";
 import { createContext, useReducer } from "react";
 import { chartsReducer } from "./reducer/chartsReducer";
+import { Saved } from "./pages/search/Saved";
 
 export const SavedChartsContext = createContext({});
 
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Search />} />
           <Route path="/chart/:symbol" element={<Chart />} />
+          <Route path="/saved" element={<Saved />} />
         </Routes>
       </SavedChartsContext.Provider>
     </div>
