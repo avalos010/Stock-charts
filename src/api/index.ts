@@ -36,7 +36,7 @@ export async function getChartData(symbol: string, dates: string[]) {
     `/api/historicstockprices?&symbol=${symbol}&from=${from}&to=${to}&fields=symbol,date,open,close,volume&apikey=${oddKey}&format=json`
   );
   const data: chartDataResponse = res.data;
-  if (typeof data.response) {
+  if (typeof data.response === "string") {
     throw new Error("No Data ");
   }
   return data;
