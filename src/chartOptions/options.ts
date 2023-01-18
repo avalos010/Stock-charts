@@ -13,6 +13,12 @@ export const options = (symbol: string, data: chartData[]) => {
         text: "Price ($)",
       },
     },
+    tooltip: {
+      shared: true,
+      valueDecimals: 2,
+      valuePrefix: "$",
+      valueSuffix: " USD",
+    },
     xAxis: {
       categories: data.map((i) => i.date),
     },
