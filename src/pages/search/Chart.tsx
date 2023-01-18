@@ -41,27 +41,29 @@ export function Chart() {
   }, [isError]);
 
   return (
-    <div>
+    <div className="container">
       {!!isLoading && <Spinner />}
       {isError && (
         <ErrorAlert message="No Data available you will be redirected in a few seconds..." />
       )}
 
-      <Button
-        text={isSaved ? "Remove from Saved" : "Add to Saved"}
-        type="primary"
-        onClick={() =>
-          isSaved
-            ? dispatch({
-                type: "remove_from_saved",
-                payload: { symbol },
-              })
-            : dispatch({
-                type: "add_to_saved",
-                payload: { data: sortedData, symbol },
-              })
-        }
-      />
+      {!!sortedData.length ? (
+        <Button
+          text={isSaved ? "Remove from Saved" : "Add to Saved"}
+          type="primary"
+          onClick={() =>
+            isSaved
+              ? dispatch({
+                  type: "remove_from_saved",
+                  payload: { symbol },
+                })
+              : dispatch({
+                  type: "add_to_saved",
+                  payload: { data: sortedData, symbol },
+                })
+          }
+        />
+      ) : null}
       {!!sortedData.length ? (
         <HighchartsReact
           highcharts={Highcharts}

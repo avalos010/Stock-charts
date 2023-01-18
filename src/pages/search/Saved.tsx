@@ -13,7 +13,7 @@ export function Saved() {
   };
 
   return (
-    <div>
+    <div className="container">
       {!state.savedCharts.length && (
         <p className="fs-2 text-center">No saved charts found.</p>
       )}

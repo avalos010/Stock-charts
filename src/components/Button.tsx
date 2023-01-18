@@ -1,6 +1,6 @@
 export function Button({ text, type, onClick }: ButtonProps) {
   return (
-    <button onClick={onClick} className={`btn btn-${type}`}>
+    <button onClick={onClick} className={`btn btn-outline-${type}`}>
       {text}
     </button>
   );

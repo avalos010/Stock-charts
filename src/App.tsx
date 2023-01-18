@@ -11,7 +11,7 @@ export const SavedChartsContext = createContext({});
 function App() {
   const [state, dispatch] = useReducer(chartsReducer, { savedCharts: [] });
   return (
-    <div className="container">
+    <div className="container-fluid">
       <Nav currentURL={useLocation().pathname} />
 
       {/* TODO: remove routing if were not going to make use of it. */}

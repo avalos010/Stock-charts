@@ -29,4 +29,18 @@ test.describe("charts", () => {
     const chartTitle = page.locator(".highcharts-title");
     await expect(chartTitle).toHaveText("MET");
   });
+
+  test.only("if no data is returned for a chart show alert", async ({
+    page,
+  }) => {
+    await page.goto("/chart/null");
+    const alert = page.locator(".alert-danger");
+    await alert.waitFor();
+    await expect(alert).toHaveText(
+      "No Data available you will be redirected in a few seconds..."
+    );
+    const input = page.locator("input[type=text]");
+    await input.waitFor();
+    await expect(page).toHaveURL("/");
+  });
 });
