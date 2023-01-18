@@ -30,9 +30,7 @@ test.describe("charts", () => {
     await expect(chartTitle).toHaveText("MET");
   });
 
-  test.only("if no data is returned for a chart show alert", async ({
-    page,
-  }) => {
+  test("if no data is returned for a chart show alert", async ({ page }) => {
     await page.goto("/chart/null");
     const alert = page.locator(".alert-danger");
     await alert.waitFor();
