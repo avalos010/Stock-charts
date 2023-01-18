@@ -16,6 +16,9 @@ export function Saved() {
       title: {
         text: symbol?.toUpperCase(),
       },
+      subtitle: {
+        text: `from ${data[0].date} to ${data[data.length - 1].date}`,
+      },
       yAxis: {
         title: {
           text: "Price ($)",

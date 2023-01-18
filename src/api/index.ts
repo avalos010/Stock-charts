@@ -30,14 +30,17 @@ export async function getAutoComplete(query: string) {
 }
 
 export async function getChartData(symbol: string, dates: string[]) {
-  const [from, to] = dates;
-  console.log(dates, "wooo");
-  const res = await axios.get(
-    `/api/historicstockprices?&symbol=${symbol}&from=${from}&to=${to}&fields=symbol,date,open,close,volume&apikey=${oddKey}&format=json`
-  );
-  const data: chartDataResponse = res.data;
-  if (typeof data.response === "string") {
-    throw new Error("No Data ");
+  if (!!dates.length) {
+    const [from, to] = dates;
+    const res = await axios.get(
+      `/api/historicstockprices?&symbol=${symbol}&from=${from}&to=${to}&fields=symbol,date,open,close,volume&apikey=${oddKey}&format=json`
+    );
+    const data: chartDataResponse = res.data;
+    if (typeof data.response === "string") {
+      throw new Error("No Data");
+    }
+    return data;
+  } else {
+    return null;
   }
-  return data;
 }

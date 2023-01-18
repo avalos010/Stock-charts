@@ -36,6 +36,11 @@ export function Chart() {
     title: {
       text: symbol?.toUpperCase(),
     },
+    subtitle: {
+      text: `from ${sortedData[0]?.date} to ${
+        sortedData[sortedData.length - 1]?.date
+      }`,
+    },
     yAxis: {
       title: {
         text: "Price ($)",
