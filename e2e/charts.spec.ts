@@ -19,13 +19,14 @@ test.describe("charts", () => {
     await expect(page).toHaveURL("/chart/GOOGL");
   });
 
-  test("saving a chart displays it under saved", async ({ page }) => {
+  test.only("saving a chart displays it under saved", async ({ page }) => {
     await page.goto("/chart/MET");
     const saveButton = page.locator("button", { hasText: "Add to Saved" });
     const savedChartsLink = page.locator("a", { hasText: "Saved Charts" });
+    await page.locator(".highcharts-container").waitFor();
     await saveButton.click();
     await savedChartsLink.click();
     const chartTitle = page.locator(".highcharts-title");
-    expect(await chartTitle.textContent()).toBe("MET");
+    await expect(chartTitle).toHaveText("MET");
   });
 });
