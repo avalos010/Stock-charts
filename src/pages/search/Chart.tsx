@@ -8,6 +8,8 @@ import { SavedChartsContext } from "../../App";
 import { Action, State } from "../../reducer/chartsReducer";
 import { ErrorAlert } from "../../components/ErrorAlert";
 import { Spinner } from "../../components/Spinner";
+import { options } from "../../chartOptions/options";
+import { Button } from "../../components/Button";
 
 export function Chart() {
   const { state, dispatch } = useContext(SavedChartsContext) as {
@@ -32,32 +34,6 @@ export function Chart() {
     setDates([convertDate(lastYear), convertDate(new Date())]);
   }, []);
 
-  const options: Highcharts.Options = {
-    title: {
-      text: symbol?.toUpperCase(),
-    },
-    subtitle: {
-      text: `from ${sortedData[0]?.date} to ${
-        sortedData[sortedData.length - 1]?.date
-      }`,
-    },
-    yAxis: {
-      title: {
-        text: "Price ($)",
-      },
-    },
-    xAxis: {
-      categories: sortedData?.map((i) => i.date),
-    },
-    //TODO: Figure out these ts errors.
-    series: [
-      //@ts-ignore
-      { name: "Open", data: sortedData?.map((d) => d.open) },
-      //@ts-ignore
-      { name: "Close", data: sortedData?.map((d) => d.close) },
-    ],
-  };
-
   useEffect(() => {
     if (isError) {
       setTimeout(() => navigate("/"), 5000);
@@ -70,7 +46,10 @@ export function Chart() {
       {isError && (
         <ErrorAlert message="No Data available you will be redirected in a few seconds..." />
       )}
-      <button
+
+      <Button
+        text={isSaved ? "Remove from Saved" : "Add to Saved"}
+        type="primary"
         onClick={() =>
           isSaved
             ? dispatch({
@@ -82,14 +61,14 @@ export function Chart() {
                 payload: { data: sortedData, symbol },
               })
         }
-      >
-        {isSaved ? "Remove from Saved" : "Add to Saved"}
-      </button>
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={options}
-        ref={chartComponentRef}
       />
+      {!!sortedData.length ? (
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={options(symbol as string, sortedData)}
+          ref={chartComponentRef}
+        />
+      ) : null}
     </div>
   );
 }

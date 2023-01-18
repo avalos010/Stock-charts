@@ -3,7 +3,8 @@ import { Action, State } from "../../reducer/chartsReducer";
 import { SavedChartsContext } from "../../App";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
-import { chartData } from "../../api";
+import { options } from "../../chartOptions/options";
+import { Button } from "../../components/Button";
 
 export function Saved() {
   const { state, dispatch } = useContext(SavedChartsContext) as {
@@ -11,46 +12,26 @@ export function Saved() {
     dispatch: React.Dispatch<Action>;
   };
 
-  const options = (symbol: string, data: chartData[]) => {
-    return {
-      title: {
-        text: symbol?.toUpperCase(),
-      },
-      subtitle: {
-        text: `from ${data[0].date} to ${data[data.length - 1].date}`,
-      },
-      yAxis: {
-        title: {
-          text: "Price ($)",
-        },
-      },
-      xAxis: {
-        categories: data.map((i) => i.date),
-      },
-      series: [
-        { name: "Open", data: data.map((d) => d.open) },
-        { name: "Close", data: data.map((d) => d.close) },
-      ],
-    };
-  };
-
   return (
     <div>
+      {!state.savedCharts.length && (
+        <p className="fs-2 text-center">No saved charts found.</p>
+      )}
       {state.savedCharts.map((chart) => {
         const opts = options(chart.name, chart.data);
-        console.log(opts);
         return (
           <div key={chart.name}>
-            <button
+            <Button
+              type="primary"
+              text="remove from saved"
               onClick={() =>
                 dispatch({
                   type: "remove_from_saved",
                   payload: { symbol: chart.name },
                 })
               }
-            >
-              remove from saved
-            </button>
+            />
+
             <HighchartsReact
               key={chart.name}
               highcharts={Highcharts}

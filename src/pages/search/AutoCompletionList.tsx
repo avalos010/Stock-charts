@@ -13,13 +13,13 @@ function AutoCompletionList({ query }: AutoCompletionListProps) {
             const symbol = symbl["1. symbol"];
             const name = symbl["2. name"];
             return (
-              <div className="d-flex flex-row align-items-center justify-content-between border-top border-bottom">
+              <div className="d-flex flex-row align-items-center justify-content-between border-top border-bottom m-2">
                 <p className="mb-0">
                   {name} - {symbol}
                 </p>
                 <Link
                   to={`/chart/${symbol}`}
-                  className="btn btn-outline-dark btn-sm"
+                  className="btn btn-outline-primary btn-sm"
                 >
                   View Chart
                 </Link>
