@@ -24,11 +24,8 @@ export function Saved() {
       xAxis: {
         categories: data.map((i) => i.date),
       },
-      //TODO: Figure out these ts errors.
       series: [
-        //@ts-ignore
         { name: "Open", data: data.map((d) => d.open) },
-        //@ts-ignore
         { name: "Close", data: data.map((d) => d.close) },
       ],
     };
@@ -49,7 +46,7 @@ export function Saved() {
                 })
               }
             >
-              remove from favorites
+              remove from saved
             </button>
             <HighchartsReact
               key={chart.name}

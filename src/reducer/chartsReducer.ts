@@ -1,6 +1,6 @@
 export function chartsReducer(state: State, action: Action) {
   switch (action.type) {
-    case "add_to_faves": {
+    case "add_to_saved": {
       return {
         ...state,
         savedCharts: [
@@ -31,6 +31,6 @@ export interface State {
 }
 
 export interface Action {
-  type?: "add_to_faves" | "remove_from_saved" | "clear_faves";
+  type?: "add_to_saved" | "remove_from_saved" | "clear_faves";
   payload?: any; //TODO: type this
 }

@@ -73,7 +73,7 @@ export function Chart() {
                 payload: { symbol },
               })
             : dispatch({
-                type: "add_to_faves",
+                type: "add_to_saved",
                 payload: { data: sortedData, symbol },
               })
         }
