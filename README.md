@@ -10,18 +10,18 @@ To run the application locally, clone the repository and install the required de
 ## Prerequisites
 Node.js\
 A valid Alpha Advantage API key\
-WallStreetOddsAPI key\
+WallStreetOddsAPI key
 
 ## Built With
 Bootstrap - CSS Framework\
 React - JavaScript library for building user interfaces\
 Vite - A lightweight development server\
-Playwright - Node.js library for end-to-end testing\
+Playwright - Node.js library for end-to-end testing
 ## Testing
 To run the tests, use npm test or yarn test.
 
 ## Acknowledgments
 Alpha Advantage API\ 
-Wall Street Odds API\
+Wall Street Odds API
 
 
