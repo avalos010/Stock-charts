@@ -1,4 +1,4 @@
-export function convertDate(date: Date) {
+export function convertDate(date: Date | string) {
   //just return yyyy-mm-dd for now.
   const year = date.toLocaleString("default", { year: "numeric" });
   const month = date.toLocaleString("default", { month: "2-digit" });
