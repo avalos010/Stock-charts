@@ -22,7 +22,7 @@ export function Chart() {
   const lastYear = new Date();
   lastYear.setFullYear(lastYear.getFullYear() - 1);
   const [dates, setDates] = useState<string[]>([]);
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  // const [showDatePicker, setShowDatePicker] = useState(false);
   const { data, isLoading, isError } = useChartData(symbol as string, dates);
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
   const sortedData = data
@@ -50,7 +50,7 @@ export function Chart() {
       )}
 
       {!!sortedData.length ? (
-        <div className="d-flex flex-row justify-content-between">
+        <div className="d-flex flex-row justify-content-between align-items-center flex-wrap">
           <Button
             text={isSaved ? "Remove from Saved" : "Add to Saved"}
             type="primary"
@@ -67,41 +67,32 @@ export function Chart() {
             }
           />
 
-          <Button
+          {/* <Button
             text="Change Dates"
             type="primary"
             onClick={() => setShowDatePicker(true)}
-          />
-          {showDatePicker ? (
-            <div
-              className="position-absolute border d-flex"
-              style={{
-                zIndex: "1",
-                top: "120px",
-                right: "10%",
-                background: "#fff",
-              }}
-            >
-              <div className="m-3">
-                <p>From:</p>
-                <DateChange
-                  date={new Date(dates[0])}
-                  onChange={(date) =>
-                    setDates((prev) => [convertDate(date), prev[1]])
-                  }
-                />
-              </div>
-              <div className="m-3">
-                <p>To:</p>
-                <DateChange
-                  date={new Date(dates[1])}
-                  onChange={(date) =>
-                    setDates((prev) => [prev[0], convertDate(date)])
-                  }
-                />
-              </div>
+          /> */}
+
+          <div className="border d-flex flex-row mt-2">
+            <div className="m-3">
+              <p>From:</p>
+              <DateChange
+                date={new Date(dates[0])}
+                onChange={(date) =>
+                  setDates((prev) => [convertDate(date), prev[1]])
+                }
+              />
             </div>
-          ) : null}
+            <div className="m-3">
+              <p>To:</p>
+              <DateChange
+                date={new Date(dates[1])}
+                onChange={(date) =>
+                  setDates((prev) => [prev[0], convertDate(date)])
+                }
+              />
+            </div>
+          </div>
         </div>
       ) : null}
       {!!sortedData.length ? (
