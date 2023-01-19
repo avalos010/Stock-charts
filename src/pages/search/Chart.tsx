@@ -77,7 +77,7 @@ export function Chart() {
               className="position-absolute border d-flex"
               style={{
                 zIndex: "1",
-                top: "23%",
+                top: "120px",
                 right: "10%",
                 background: "#fff",
               }}
