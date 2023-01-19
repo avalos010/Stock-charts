@@ -1,6 +1,8 @@
 import { chartData } from "../api";
 
-export const options = (symbol: string, data: chartData[]) => {
+export let options: optionsFunc;
+
+options = (symbol, data, type = "line") => {
   return {
     title: {
       text: symbol?.toUpperCase(),
@@ -23,8 +25,16 @@ export const options = (symbol: string, data: chartData[]) => {
       categories: data.map((i) => i.date),
     },
     series: [
-      { name: "Open", data: data.map((d) => d.open) },
-      { name: "Close", data: data.map((d) => d.close) },
+      { type, name: "Open", data: data.map((d) => d.open) },
+      { type, name: "Close", data: data.map((d) => d.close) },
     ],
   };
 };
+
+interface optionsFunc {
+  (
+    symbol: string,
+    data: chartData[],
+    type?: "line" | "area" | "bar" | "areaspline"
+  ): Highcharts.Options;
+}
