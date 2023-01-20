@@ -11,17 +11,21 @@ import { Spinner } from "../../components/Spinner";
 import { options } from "../../chartOptions/options";
 import { Button } from "../../components/Button";
 import { DateChange } from "../../components/DateChange";
+import React from "react";
+import { chartType } from "../../chartType/chartType";
 
 export function Chart() {
   const { state, dispatch } = useContext(SavedChartsContext) as {
     state: State;
     dispatch: React.Dispatch<Action>;
   };
+  const chartTypes = ["line", "area", "column", "scatter"];
   const { symbol } = useParams();
   const navigate = useNavigate();
   const lastYear = new Date();
   lastYear.setFullYear(lastYear.getFullYear() - 1);
   const [dates, setDates] = useState<string[]>([]);
+  const [chartType, setChartType] = useState("line");
   // const [showDatePicker, setShowDatePicker] = useState(false);
   const { data, isLoading, isError } = useChartData(symbol as string, dates);
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
@@ -62,7 +66,7 @@ export function Chart() {
                   })
                 : dispatch({
                     type: "add_to_saved",
-                    payload: { data: sortedData, symbol },
+                    payload: { data: sortedData, symbol, type: chartType },
                   })
             }
           />
@@ -98,10 +102,26 @@ export function Chart() {
       {!!sortedData.length ? (
         <HighchartsReact
           highcharts={Highcharts}
-          options={options(symbol as string, sortedData)}
+          options={options(
+            symbol as string,
+            sortedData,
+            chartType as chartType
+          )}
           ref={chartComponentRef}
         />
       ) : null}
+
+      <div className="d-flex flex-row justify-content-center">
+        {React.Children.toArray(chartTypes).map((type) => (
+          <Button
+            key={type as string}
+            onClick={() => setChartType(type as string)}
+            className="m-1"
+            text={type as string}
+            type="primary"
+          />
+        ))}
+      </div>
     </div>
   );
 }

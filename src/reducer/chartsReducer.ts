@@ -1,10 +1,16 @@
+import { chartType } from "../chartType/chartType";
+
 export function chartsReducer(state: State, action: Action) {
   switch (action.type) {
     case "add_to_saved": {
       return {
         ...state,
         savedCharts: [
-          { data: action.payload.data, name: action.payload.symbol },
+          {
+            data: action.payload.data,
+            name: action.payload.symbol,
+            type: action.payload.type,
+          },
           ...state.savedCharts,
         ],
       };
@@ -27,6 +33,7 @@ export interface State {
   savedCharts: {
     data: [];
     name: string;
+    type: chartType;
   }[];
 }
 

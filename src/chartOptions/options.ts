@@ -1,8 +1,7 @@
 import { chartData } from "../api";
+import { chartType } from "../chartType/chartType";
 
-export let options: optionsFunc;
-
-options = (symbol, data, type = "line") => {
+export const options = (symbol: string, data: chartData[], type: chartType) => {
   return {
     title: {
       text: symbol?.toUpperCase(),
@@ -30,11 +29,3 @@ options = (symbol, data, type = "line") => {
     ],
   };
 };
-
-interface optionsFunc {
-  (
-    symbol: string,
-    data: chartData[],
-    type?: "line" | "area" | "bar" | "areaspline"
-  ): Highcharts.Options;
-}

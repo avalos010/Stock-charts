@@ -18,7 +18,7 @@ export function Saved() {
         <p className="fs-2 text-center">No saved charts found.</p>
       )}
       {state.savedCharts.map((chart) => {
-        const opts = options(chart.name, chart.data);
+        const opts = options(chart.name, chart.data, chart.type);
         return (
           <div key={chart.name}>
             <Button

@@ -1,13 +1,17 @@
-export function Button({ text, type, onClick }: ButtonProps) {
+export function Button({ text, type, onClick, className }: ButtonProps) {
   return (
-    <button onClick={onClick} className={`btn btn-outline-${type}`}>
+    <button
+      onClick={onClick}
+      className={`btn btn-outline-${type} ${className}`}
+    >
       {text}
     </button>
   );
 }
 
 interface ButtonProps {
-  text: string;
+  text: string | number;
   type: "primary" | "secondary" | "light" | "dark";
-  onClick?: () => any;
+  onClick?: () => any | void;
+  className?: string;
 }
