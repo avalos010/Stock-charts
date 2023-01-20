@@ -19,7 +19,7 @@ export function Chart() {
     state: State;
     dispatch: React.Dispatch<Action>;
   };
-  const chartTypes = ["line", "area", "column", "scatter"];
+  const chartTypes = ["line", "area", "column"];
   const { symbol } = useParams();
   const navigate = useNavigate();
   const lastYear = new Date();

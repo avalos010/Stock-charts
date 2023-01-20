@@ -1,1 +1,1 @@
-export type chartType = "line" | "area" | "column" | "scatter";
+export type chartType = "line" | "area" | "column";
