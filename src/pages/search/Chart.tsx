@@ -77,7 +77,7 @@ export function Chart() {
             onClick={() => setShowDatePicker(true)}
           /> */}
 
-          <div className="border d-flex flex-row mt-2">
+          <div className="border d-flex flex-row mt-2 flex-wrap justify-content-center">
             <div className="m-3">
               <p>From:</p>
               <DateChange
